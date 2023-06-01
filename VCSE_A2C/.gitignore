@@ -1,0 +1,17 @@
+*__pycache__
+*egg-info
+.vscode
+rl-starter-files/rl-starter-files/storage
+rl-starter-files/rl-starter-files/figures
+rl-starter-files/rl-starter-files/csv_files
+rl-starter-files/rl-starter-files/storage_old
+torch-ac/torch-ac/build/*
+torch-ac/torch-ac/dist/*
+.ipynb
+.gif
+.png
+.csv
+rl-starter-files/rl-starter-files/*.ipynb
+rl-starter-files/rl-starter-files/*.gif
+rl-starter-files/rl-starter-files/*.png
+rl-starter-files/rl-starter-files/*.csv

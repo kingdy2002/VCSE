@@ -1,0 +1,145 @@
+defaults:
+
+  # Train Script
+  logdir: logs/
+  seed: 0
+  task: metaworld_reach
+  envs: 1
+  envs_parallel: none
+  render_size: [64, 64]
+  dmc_camera: -1
+  camera: none
+  time_limit: 0
+  action_repeat: 2
+  steps: 1e8
+  log_every: 5e2
+  eval_every: 5e2
+  eval_eps: 10
+  prefill: 5000
+  pretrain: 1
+  mae_pretrain: 5000
+  train_every: 5
+  train_mae_every: 5
+  train_steps: 1
+  train_mae_steps: 1
+  expl_until: 0
+  replay: {capacity: 2e6, minlen: 50, maxlen: 50, prioritize_ends: True}
+  dataset: {batch: 16, length: 50}
+  mae_dataset: {batch: 32, length: 32}
+  log_keys_video: ['image']
+  log_keys_sum: '^$'
+  log_keys_mean: '^$'
+  log_keys_max: '^$'
+  precision: 16
+  jit: True
+
+  #intrinsic
+  use_int_reward: True
+  k: 12
+  use_vcse: True
+  use_int_stream_norm: True
+  beta_init: 1
+  reduce_dim: 256
+
+  # Agent
+  clip_rewards: identity
+  expl_noise: 0.0
+  eval_noise: 0.0
+  eval_state_mean: False
+
+  # MAE
+  mask_ratio: 0.75
+  mae: {img_size: 64, patch_size: 8, embed_dim: 256, depth: 4, num_heads: 4, decoder_embed_dim: 256, decoder_depth: 3, decoder_num_heads: 4, reward_pred: True, early_conv: True, in_chans: 3}
+  wm_flat_vit: {img_size: 8, patch_size: 1, embed_dim: 128, depth: 2, num_heads: 4, decoder_embed_dim: 128, decoder_depth: 2, decoder_num_heads: 4, in_chans: 256}
+
+  # World Model
+  grad_heads: [reward]
+  pred_discount: False
+  rssm: {action_free: False, hidden: 1024, deter: 1024, stoch: 32, discrete: 32, act: elu, norm: none, std_act: sigmoid2, min_std: 0.1}
+  reward_head: {layers: [512, 512, 512, 512], act: elu, norm: none, dist: symlog}
+  discount_head: {layers: [512, 512, 512, 512], act: elu, norm: none, dist: binary}
+  loss_scales: {feature: 1.0, kl: 1.0, reward: 1.0, discount: 1.0, proprio: 1.0, mae_reward: 1.0}
+  wmkl: {scale: 1.0}
+  wmkl_minloss: 0.0
+  wmkl_balance: 0.8
+  model_opt: {opt: adam, lr: 3e-4, eps: 1e-5, clip: 100.0, wd: 1e-6, wd_pattern: 'kernel', warmup: 0}
+  mae_opt: {opt: adam, lr: 3e-4, eps: 1e-5, clip: 100.0, wd: 1e-6, warmup: 2500}
+
+  # Actor Critic
+  actor: {layers: [512, 512, 512, 512], act: elu, norm: none, dist: auto, min_std: 0.1}
+  critic: {layers: [512, 512, 512, 512], act: elu, norm: none, dist: mse}
+  actor_opt: {opt: adam, lr: 1e-4, eps: 1e-5, clip: 100.0, wd: 1e-6, wd_pattern: 'kernel', warmup: 0}
+  critic_opt: {opt: adam, lr: 1e-4, eps: 1e-5, clip: 100.0, wd: 1e-6, wd_pattern: 'kernel', warmup: 0}
+  extr_critic_opt: {opt: adam, lr: 1e-4, eps: 1e-5, clip: 100.0, wd: 1e-6, wd_pattern: 'kernel', warmup: 0}
+  discount: 0.99
+  discount_lambda: 0.95
+  imag_horizon: 15
+  actor_grad: auto
+  actor_grad_mix: 0.1
+  aent: {scale: 1e-4}
+  slow_target: True
+  slow_target_update: 100
+  slow_target_fraction: 1
+  slow_baseline: True
+  reward_norm: {momentum: 1.0, scale: 1.0, eps: 1e-8 }
+  int_reward_norm_vcse: {momentum: 0.99, scale: 1.0, eps: 1e-8}
+  int_reward_norm_se: {momentum: 0.99, scale: 1.0, eps: 1e-8}
+metaworld:
+  task: metaworld_reach
+  time_limit: 250
+  action_repeat: 2
+  eval_every: 1e4
+  eval_eps: 10
+  camera: corner2
+  steps: 252000
+  dataset: {batch: 50, length: 50}
+  reward_norm.momentum: 0.99
+  wmkl_minloss: 0.01
+
+dmc_vision:
+
+  task: dmc_walker_walk
+  action_repeat: 2
+  eval_every: 1e4
+  eval_eps: 5
+  replay.prioritize_ends: False
+  steps: 502000
+  dataset: {batch: 16, length: 50}
+  wmkl_minloss: 0.01
+
+rlbench:
+  task: rlbench_reach_target
+  time_limit: 200
+  action_repeat: 2
+  eval_every: 5e3
+  log_every: 5e3
+  eval_eps: 5
+  steps: 502000
+  dataset: {batch: 50, length: 50}
+  reward_norm.momentum: 0.99
+  wmkl_minloss: 0.1
+  wmkl.scale: 0.1
+  # episodic
+  pred_discount: True
+  replay.minlen: 1
+  grad_heads: [reward, discount]
+  # rlbench-specific async env
+  envs_parallel: process
+
+debug:
+  eval_eps: 1
+  dataset.batch: 8
+  dataset.length: 10
+  mae_dataset.batch: 4
+  mae_dataset.length: 8
+  mae.depth: 1
+  mae.decoder_depth: 1
+  pretrain: 1
+  mae_pretrain: 1
+  rssm.hidden: 64
+  rssm.deter: 64
+  rssm.stoch: 4
+  rssm.discrete: 4
+  imag_horizon: 3
+  jit: False
+  log_every: 100

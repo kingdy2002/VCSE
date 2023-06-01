@@ -1,0 +1,8 @@
+__pycache__/
+.ipynb_checkpoints/
+exp
+tb
+exp_fixed
+exp_final
+*.ipynb
+*.sh
