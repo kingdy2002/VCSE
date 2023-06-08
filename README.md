@@ -11,7 +11,7 @@ The repository is organized into several folders, each containing the implementa
 - `VCSE_MWM/`: Contains the implementation of the MWM algorithm.
 - `VCSE_SAC/`: Contains the implementation of the SAC algorithm.
 
-If you wand to refer this research, please cite:
+If you want to refer this research, please cite:
 
 ```
 @misc{kim2023accelerating,
