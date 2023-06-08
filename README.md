@@ -14,13 +14,11 @@ The repository is organized into several folders, each containing the implementa
 If you want to refer this research, please cite:
 
 ```
-@misc{kim2023accelerating,
-      title={Accelerating Reinforcement Learning with Value-Conditional State Entropy Exploration}, 
-      author={Dongyoung Kim and Jinwoo Shin and Pieter Abbeel and Younggyo Seo},
-      year={2023},
-      eprint={2305.19476},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
+@article{kim2023accelerating,
+  title={Accelerating Reinforcement Learning with Value-Conditional State Entropy Exploration},
+  author={Kim, Dongyoung and Shin, Jinwoo and Abbeel, Pieter and Seo, Younggyo},
+  journal={arXiv preprint arXiv:2305.19476},
+  year={2023}
 }
 ```
 
