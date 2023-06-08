@@ -43,6 +43,3 @@ Refer to the individual README files in VCSE_MWM for details of installation and
 Our code is built on top of the [pytorch_sac](https://github.com/denisyarats/pytorch_sac) repository.
 
 Refer to the individual README files in VCSE_SAC for details of installation and instructions.
-
-
-Please refer to the individual README files in each folder for more detailed instructions.
