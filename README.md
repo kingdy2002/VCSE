@@ -12,6 +12,7 @@ The repository is organized into several folders, each containing the implementa
 - `VCSE_SAC/`: Contains the implementation of the SAC algorithm.
 
 If you wand to refer this research, please cite:
+
 """
 @misc{kim2023accelerating,
       title={Accelerating Reinforcement Learning with Value-Conditional State Entropy Exploration}, 
