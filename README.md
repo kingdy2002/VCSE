@@ -13,7 +13,7 @@ The repository is organized into several folders, each containing the implementa
 
 If you wand to refer this research, please cite:
 
-"""
+'''
 @misc{kim2023accelerating,
       title={Accelerating Reinforcement Learning with Value-Conditional State Entropy Exploration}, 
       author={Dongyoung Kim and Jinwoo Shin and Pieter Abbeel and Younggyo Seo},
@@ -22,7 +22,7 @@ If you wand to refer this research, please cite:
       archivePrefix={arXiv},
       primaryClass={cs.LG}
 }
-"""
+'''
 
 ## VCSE + A2C
 Our code is built on top of the RE3 + A2C implementation [RE3](https://github.com/younggyoseo/RE3). That trainning code can be found in rl-starter-files directory. Which is fork from [rl-starter-files](https://github.com/lcswillems/rl-starter-files) and A2C implementation is fork from [torch-ac](https://github.com/lcswillems/torch-ac)
